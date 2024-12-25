@@ -33,6 +33,15 @@ def save_configuration():
     if save_to_file("lindbergh.conf", config):
         messagebox.showinfo("Success", "Configuration saved successfully!")
 
+# Function to execute a command and display the result
+def show_serial_ports():
+    try:
+        subprocess.Popen(["x-terminal-emulator", "-e", "bash", "-c", "sudo dmesg | grep tty; exec bash"])
+    except FileNotFoundError:
+        messagebox.showerror("Error", "No terminal emulator found to execute the command.")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to open terminal: {e}")
+
 # Gather configuration from the UI
 def gather_config():
     try:
@@ -135,9 +144,12 @@ for i, (label_text, options, default) in enumerate(config_options):
 ) = variables
 
 # Add Save Configuration button
-ttk.Button(root, text="Save Configuration", command=save_configuration).grid(row=1, column=0, pady=10, padx=10, sticky=(tk.W, tk.E))
+ttk.Button(root, text="Save Configuration", command=save_configuration).grid(row=i + 1, column=0, pady=10, padx=10, sticky=(tk.W, tk.E))
 # Add Save and Launch button
-ttk.Button(root, text="Save and Launch", command=save_and_launch).grid(row=2, column=0, pady=10, padx=10, sticky=(tk.W, tk.E))
+ttk.Button(root, text="Save and Launch", command=save_and_launch).grid(row=i + 2, column=0, pady=10, padx=10, sticky=(tk.W, tk.E))
+
+# Add button to check serial ports
+ttk.Button(root, text="which /dev/ttyS* is my serial port?", command=show_serial_ports).grid(row=i + 3, column=0, pady=10, padx=10, sticky=(tk.W, tk.E))
 
 # Main loop
 root.mainloop()
