@@ -14,7 +14,7 @@ def save_and_launch():
 
     # Launch lindbergh.elf
     try:
-        subprocess.Popen(["./lindbergh"])
+        subprocess.Popen(["./lindbergh.elf"])
         messagebox.showinfo("Success", "Lindbergh launched successfully!")
     except FileNotFoundError:
         messagebox.showerror("Error", "The file 'lindbergh.elf' was not found in the current directory.")
@@ -122,7 +122,7 @@ variables = []
 for i, (label_text, options, default) in enumerate(config_options):
     ttk.Label(frame, text=label_text).grid(row=i, column=0, sticky=tk.W, pady=5)
     var = tk.StringVar(value=default)
-    ttk.Combobox(frame, textvariable=var, values=options, state="readonly").grid(row=i, column=1, padx=5, pady=5)
+    ttk.Combobox(frame, textvariable=var, values=options, state="readonly", width=60).grid(row=i, column=1, padx=5, pady=5)
     variables.append(var)
 
 # Assign variables for each configuration
