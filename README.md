@@ -1,5 +1,9 @@
 Just a proof of concept lindbergh loader GUI at very alpha state.
 
-Need "sudo apt install python3-tk" as requirement, then you can launch it with "python3 lindbergh_gui.py" command
+Requirements:
+sudo apt install python3-tk
+python3 -m pip install --upgrade Pillow
 
-![Screenshot from 2024-12-24 00-08-13](https://github.com/user-attachments/assets/17b11138-9ea1-44c7-a16e-cd015ee5b232)
+launch it with "python3 lindbergh_gui.py" command
+
+![gui](https://github.com/user-attachments/assets/8e8d5dc5-1fe7-4465-8343-47097794d3a3)
