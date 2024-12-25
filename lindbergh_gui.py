@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+from PIL import Image, ImageTk
 import subprocess
 
 # Function to save configuration and launch the application
@@ -91,9 +92,21 @@ def save_to_file(filename, content):
 root = tk.Tk()
 root.title("Lindbergh Launcher")
 
+# Load the image
+try:
+    image = Image.open("image.png")  # Load the image
+    photo = ImageTk.PhotoImage(image)  # Convert image to Tkinter-compatible format
+
+    label = tk.Label(root, image=photo)  # Create a label widget for the image
+    label.image = photo  # Keep a reference to the image to prevent garbage collection
+    label.grid(row=0, column=0, columnspan=2, pady=10, sticky="ew")  # Place the image at the top
+    root.grid_rowconfigure(0, weight=0)  # Prevent the image row from resizing
+except Exception as e:
+    print(f"Error loading image: {e}")
+
 # Create a frame for the resolution options
 frame = ttk.Frame(root, padding="10")
-frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+frame.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
 # Add UI elements for each configuration option
 config_options = [
